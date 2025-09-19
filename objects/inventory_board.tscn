@@ -1,0 +1,88 @@
+[gd_scene load_steps=17 format=3 uid="uid://bwaigrg3nwm3"]
+
+[ext_resource type="Script" uid="uid://c8vwq583k6bmu" path="res://objects/anchored_animatable_body_3d.gd" id="1_ifs6f"]
+[ext_resource type="Texture2D" uid="uid://dvt1ebdeiqlpe" path="res://assets/ambientcg.com/wood-067/Wood067_1K-JPG_Color.jpg" id="3_dlv13"]
+[ext_resource type="PackedScene" uid="uid://ducoqe3p45nc8" path="res://objects/cube.tscn" id="4_6ig25"]
+[ext_resource type="Shader" uid="uid://ggot4h5nyap" path="res://objects/shaders/textured_normal_roughness.gdshader" id="4_76lpi"]
+[ext_resource type="Texture2D" uid="uid://clqe2g28juuhu" path="res://assets/ambientcg.com/wood-067/Wood067_1K-JPG_NormalGL.jpg" id="4_n2d5k"]
+[ext_resource type="PackedScene" uid="uid://conwbvdi2t7gq" path="res://objects/godot_plush.tscn" id="5_6ig25"]
+[ext_resource type="Texture2D" uid="uid://bsebfi14c4qe5" path="res://assets/ambientcg.com/wood-094/Wood094_1K-JPG_Color.jpg" id="5_dlv13"]
+[ext_resource type="Texture2D" uid="uid://clrx2c4sw3bck" path="res://assets/ambientcg.com/wood-067/Wood067_1K-JPG_Roughness.jpg" id="5_hisbt"]
+[ext_resource type="PackedScene" uid="uid://i6mkqd1nx2dg" path="res://objects/openxr.tscn" id="6_1exnp"]
+[ext_resource type="Texture2D" uid="uid://cmixhp73hkt0j" path="res://assets/ambientcg.com/wood-094/Wood094_1K-JPG_NormalGL.jpg" id="6_n2d5k"]
+[ext_resource type="Texture2D" uid="uid://ceryokxluxwgh" path="res://assets/ambientcg.com/wood-094/Wood094_1K-JPG_Roughness.jpg" id="7_hisbt"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kmar1"]
+render_priority = 0
+shader = ExtResource("4_76lpi")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("3_dlv13")
+shader_parameter/normal_texture = ExtResource("4_n2d5k")
+shader_parameter/roughness_texture = ExtResource("5_hisbt")
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.10000000000582077
+shader_parameter/uv_scale = Vector2(1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_av4n7"]
+material = SubResource("ShaderMaterial_kmar1")
+top_radius = 0.02
+bottom_radius = 0.02
+height = 0.1
+radial_segments = 16
+rings = 1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_csjqa"]
+margin = 0.01
+height = 0.1
+radius = 0.05
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ploov"]
+render_priority = 0
+shader = ExtResource("4_76lpi")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("5_dlv13")
+shader_parameter/normal_texture = ExtResource("6_n2d5k")
+shader_parameter/roughness_texture = ExtResource("7_hisbt")
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.10000000000582077
+shader_parameter/uv_scale = Vector2(0.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_av4n7"]
+material = SubResource("ShaderMaterial_ploov")
+size = Vector3(0.5, 0.5, 0.04)
+
+[node name="InventoryBoard" type="AnimatableBody3D"]
+collision_layer = 3
+collision_mask = 3
+sync_to_physics = false
+script = ExtResource("1_ifs6f")
+reset_on_drop = false
+can_trash = false
+is_unique = true
+
+[node name="HandleMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.215238, 0)
+mesh = SubResource("CylinderMesh_av4n7")
+
+[node name="HandleCollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.215238, 0)
+shape = SubResource("CylinderShape3D_csjqa")
+
+[node name="Board" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.08476201, 0)
+mesh = SubResource("BoxMesh_av4n7")
+
+[node name="Point01" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.13, 0.21, 0.1)
+
+[node name="Cube" parent="Point01" instance=ExtResource("4_6ig25")]
+
+[node name="Point02" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.13, 0.21, 0.1)
+
+[node name="GodotPlush" parent="Point02" instance=ExtResource("5_6ig25")]
+
+[node name="Point03" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.040238008, 0.1)
+
+[node name="Openxr" parent="Point03" instance=ExtResource("6_1exnp")]

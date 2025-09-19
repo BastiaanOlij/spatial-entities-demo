@@ -1,0 +1,5 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://c78oc3l6p2iyk"]
+
+[resource]
+resource_name = "Hand"
+roughness = 0.5

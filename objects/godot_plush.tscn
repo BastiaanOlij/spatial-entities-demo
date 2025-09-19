@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://conwbvdi2t7gq"]
+
+[ext_resource type="PackedScene" uid="uid://dgrov26yrtexy" path="res://assets/FR3NKD/godot_plush V2.glb" id="1_17bls"]
+[ext_resource type="Script" uid="uid://eve77icugo3g" path="res://objects/anchored_rigid_body_3d.gd" id="1_t0onp"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_17bls"]
+radius = 0.0831029
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_gu6cq"]
+margin = 0.01
+radius = 0.01978619
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_7bv04"]
+radius = 0.026992695
+
+[node name="GodotPlush" type="RigidBody3D"]
+freeze = true
+script = ExtResource("1_t0onp")
+
+[node name="godot_plush V2" parent="." instance=ExtResource("1_17bls")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.06132389, 0)
+
+[node name="BodyCollision" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_17bls")
+
+[node name="RightHandCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0944725, -0.043871924, 0)
+shape = SubResource("SphereShape3D_gu6cq")
+
+[node name="LeftHandCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.094, -0.044, 0)
+shape = SubResource("SphereShape3D_gu6cq")
+
+[node name="RightFootCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.033347774, -0.03695731, 0.07696919)
+shape = SubResource("SphereShape3D_7bv04")
+
+[node name="LeftFootCollision" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.033, -0.037, 0.077)
+shape = SubResource("SphereShape3D_7bv04")
+
+[editable path="godot_plush V2"]

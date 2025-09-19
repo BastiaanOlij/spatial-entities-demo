@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://b4oem6nrg2dh5"]
+
+[ext_resource type="Script" uid="uid://d6c4o0hhngrq" path="res://spatial_entities/spatial_entities_marker.gd" id="1_d3lg0"]
+[ext_resource type="PackedScene" uid="uid://g3tc0ii7yb01" path="res://spatial_entities/helpers/axis.tscn" id="2_3f4oh"]
+
+[node name="SpatialEntitiesMarker" type="XRAnchor3D"]
+script = ExtResource("1_d3lg0")
+
+[node name="Description" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0.11732233)
+pixel_size = 0.0005
+text = "Marker"
+vertical_alignment = 2
+
+[node name="Axis" parent="." instance=ExtResource("2_3f4oh")]

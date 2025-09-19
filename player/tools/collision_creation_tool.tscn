@@ -1,0 +1,52 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjbk77dtubyfc"]
+
+[ext_resource type="Script" uid="uid://vombdrbrubcd" path="res://player/tools/collision_creation_tool.gd" id="1_lpi31"]
+[ext_resource type="Shader" uid="uid://bb8r2mfrk34ob" path="res://player/tools/aim_laser.gdshader" id="2_f8ngc"]
+[ext_resource type="Shader" uid="uid://bwmv6ag0bsjtd" path="res://player/tools/floor_target.gdshader" id="3_dd1wm"]
+[ext_resource type="Texture2D" uid="uid://bidill15xeghn" path="res://assets/kenney.nl/game-icons/PNG/White/1x/plus.png" id="4_q070g"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dd1wm"]
+render_priority = 0
+shader = ExtResource("2_f8ngc")
+
+[sub_resource type="BoxMesh" id="BoxMesh_hdtg8"]
+size = Vector3(0.005, 0.005, 0.3)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q070g"]
+render_priority = 0
+shader = ExtResource("3_dd1wm")
+shader_parameter/albedo_texture = ExtResource("4_q070g")
+shader_parameter/uv_scale = Vector2(10, 10)
+shader_parameter/circle_size = 0.05
+shader_parameter/inner_size = 0.1999999999970896
+shader_parameter/fade_size = 0.3000000000029104
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_f8ngc"]
+size = Vector2(0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q070g"]
+transparency = 1
+no_depth_test = true
+albedo_color = Color(0.28627452, 0.6392157, 0.93333334, 0.37254903)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q070g"]
+
+[node name="CollisionCreationTool" type="Node3D"]
+script = ExtResource("1_lpi31")
+
+[node name="AimMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0, -0.15)
+material_override = SubResource("ShaderMaterial_dd1wm")
+mesh = SubResource("BoxMesh_hdtg8")
+
+[node name="FloorMesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.1205275, 0)
+top_level = true
+material_override = SubResource("ShaderMaterial_q070g")
+mesh = SubResource("PlaneMesh_f8ngc")
+
+[node name="CreationMesh" type="MeshInstance3D" parent="."]
+top_level = true
+visible = false
+material_override = SubResource("StandardMaterial3D_q070g")
+mesh = SubResource("BoxMesh_q070g")

@@ -1,0 +1,17 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://bqp2i7n3p1g0c"]
+
+[ext_resource type="Shader" uid="uid://ggot4h5nyap" path="res://objects/shaders/textured_normal_roughness.gdshader" id="1_41xev"]
+[ext_resource type="Texture2D" uid="uid://cjr4k4vt5roeu" path="res://assets/ambientcg.com/plastic-011/Plastic011_1K-JPG_Color.jpg" id="2_doth1"]
+[ext_resource type="Texture2D" uid="uid://cgexujolx48ud" path="res://assets/ambientcg.com/plastic-011/Plastic011_1K-JPG_NormalGL.jpg" id="3_lpl5r"]
+[ext_resource type="Texture2D" uid="uid://dhtuw1qj4asyd" path="res://assets/ambientcg.com/plastic-011/Plastic011_1K-JPG_Roughness.jpg" id="4_37cy3"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_41xev")
+shader_parameter/albedo = Color(1, 1, 1, 1)
+shader_parameter/albedo_texture = ExtResource("2_doth1")
+shader_parameter/normal_texture = ExtResource("3_lpl5r")
+shader_parameter/roughness_texture = ExtResource("4_37cy3")
+shader_parameter/metallic = 0.0
+shader_parameter/specular = 0.056000002660000006
+shader_parameter/uv_scale = Vector2(5, 10)

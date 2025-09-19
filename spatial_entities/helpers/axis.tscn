@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://g3tc0ii7yb01"]
+
+[ext_resource type="PackedScene" uid="uid://dofmep1rik5kc" path="res://spatial_entities/helpers/vector.tscn" id="1_axhod"]
+
+[node name="Axis" type="Node3D"]
+
+[node name="Forward" parent="." instance=ExtResource("1_axhod")]
+color = Color(0, 0, 1, 1)
+
+[node name="Up" parent="." instance=ExtResource("1_axhod")]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0)
+color = Color(0, 1, 0, 1)
+
+[node name="Left" parent="." instance=ExtResource("1_axhod")]
+transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0, 0, 0)
+color = Color(1, 0, 0, 1)

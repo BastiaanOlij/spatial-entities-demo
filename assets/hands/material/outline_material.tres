@@ -1,0 +1,9 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://cdioatccaw4ph"]
+
+[ext_resource type="Shader" uid="uid://bub613jl4iybq" path="res://assets/hands/material/outline_material_shader.tres" id="1_eo4iu"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_eo4iu")
+shader_parameter/ColorParameter = Color(1, 1, 1, 1)
+shader_parameter/fresnel_power = 4.90000005811468

@@ -1,0 +1,105 @@
+[gd_scene load_steps=8 format=3 uid="uid://2h7ihkg4tm6q"]
+
+[ext_resource type="Script" uid="uid://bhiawuakf67bg" path="res://player/wrist_ui/wrist_ui_display.gd" id="1_s18o0"]
+[ext_resource type="Texture2D" uid="uid://vh6rh2roqlw" path="res://assets/kenney.nl/game-icons/PNG/White/2x/plus.png" id="2_nysge"]
+[ext_resource type="Texture2D" uid="uid://b4dk6vcpa37gf" path="res://assets/kenney.nl/game-icons/PNG/White/2x/wrench.png" id="3_8u3xf"]
+[ext_resource type="Texture2D" uid="uid://xsy5bays1kol" path="res://assets/kenney.nl/game-icons/PNG/White/2x/power.png" id="4_fx4w6"]
+[ext_resource type="Texture2D" uid="uid://de820nclfan0r" path="res://assets/kenney.nl/game-icons/PNG/White/2x/cross.png" id="5_8u3xf"]
+[ext_resource type="Texture2D" uid="uid://dpfx74it4gsy6" path="res://assets/kenney.nl/game-icons/PNG/White/2x/exitLeft.png" id="5_vd8no"]
+[ext_resource type="Texture2D" uid="uid://bouspwmegl41e" path="res://assets/kenney.nl/game-icons/PNG/White/2x/checkmark.png" id="6_fx4w6"]
+
+[node name="WristUIDisplay" type="Control"]
+layout_mode = 3
+offset_right = 256.0
+offset_bottom = 256.0
+script = ExtResource("1_s18o0")
+
+[node name="MainContainer" type="CenterContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" type="VBoxContainer" parent="MainContainer"]
+layout_mode = 2
+
+[node name="Row01" type="HBoxContainer" parent="MainContainer/MainMenu"]
+layout_mode = 2
+
+[node name="AddButton" type="TextureButton" parent="MainContainer/MainMenu/Row01"]
+layout_mode = 2
+texture_normal = ExtResource("2_nysge")
+
+[node name="SettingsButton" type="TextureButton" parent="MainContainer/MainMenu/Row01"]
+layout_mode = 2
+texture_normal = ExtResource("3_8u3xf")
+
+[node name="Row02" type="HBoxContainer" parent="MainContainer/MainMenu"]
+layout_mode = 2
+
+[node name="ExitButton" type="TextureButton" parent="MainContainer/MainMenu/Row02"]
+layout_mode = 2
+texture_normal = ExtResource("4_fx4w6")
+
+[node name="AddMenu" type="VBoxContainer" parent="MainContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/AddMenu"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "..."
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="MainContainer/AddMenu"]
+layout_mode = 2
+alignment = 1
+
+[node name="CancelButton" type="TextureButton" parent="MainContainer/AddMenu/Buttons"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+texture_normal = ExtResource("5_8u3xf")
+
+[node name="SettingsMenu" type="VBoxContainer" parent="MainContainer"]
+visible = false
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MainContainer/SettingsMenu"]
+custom_minimum_size = Vector2(250, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Will be adding a settings menu here..."
+autowrap_mode = 2
+
+[node name="Buttons" type="HBoxContainer" parent="MainContainer/SettingsMenu"]
+layout_mode = 2
+alignment = 2
+
+[node name="ReturnButton" type="TextureButton" parent="MainContainer/SettingsMenu/Buttons"]
+layout_mode = 2
+texture_normal = ExtResource("5_vd8no")
+
+[node name="QuitMenu" type="HBoxContainer" parent="MainContainer"]
+visible = false
+layout_mode = 2
+
+[node name="CancelButton" type="TextureButton" parent="MainContainer/QuitMenu"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 2
+texture_normal = ExtResource("5_8u3xf")
+
+[node name="OkButton" type="TextureButton" parent="MainContainer/QuitMenu"]
+modulate = Color(0, 1, 0, 1)
+layout_mode = 2
+texture_normal = ExtResource("6_fx4w6")
+
+[connection signal="pressed" from="MainContainer/MainMenu/Row01/AddButton" to="." method="_on_add_button_pressed"]
+[connection signal="pressed" from="MainContainer/MainMenu/Row01/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="pressed" from="MainContainer/MainMenu/Row02/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="MainContainer/AddMenu/Buttons/CancelButton" to="." method="_on_add_cancel_button_pressed"]
+[connection signal="pressed" from="MainContainer/SettingsMenu/Buttons/ReturnButton" to="." method="_on_settings_return_button_pressed"]
+[connection signal="pressed" from="MainContainer/QuitMenu/CancelButton" to="." method="_on_quit_cancel_button_pressed"]
+[connection signal="pressed" from="MainContainer/QuitMenu/OkButton" to="." method="_on_quit_ok_button_pressed"]

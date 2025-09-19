@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://c0yh3w5mhleyb"]
+
+[ext_resource type="Script" uid="uid://w2russg0flf8" path="res://player/handlers/grab_handler.gd" id="1_gnyk1"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_rh653"]
+resource_local_to_scene = true
+radius = 0.05
+
+[node name="GrabHandler" type="Area3D"]
+process_mode = 1
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("1_gnyk1")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_rh653")
+
+[node name="Timer" type="Timer" parent="CollisionShape3D"]

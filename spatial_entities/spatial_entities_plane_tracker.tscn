@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://dy8b1kf4wem8f"]
+
+[ext_resource type="Script" uid="uid://cwtvxssqdm5lu" path="res://spatial_entities/spatial_entities_plane_tracker.gd" id="1_0iy5a"]
+[ext_resource type="Material" uid="uid://du3srg1ojao6b" path="res://spatial_entities/material/test_surface_material.tres" id="2_otf88"]
+[ext_resource type="PackedScene" uid="uid://g3tc0ii7yb01" path="res://spatial_entities/helpers/axis.tscn" id="2_wg0hh"]
+
+[node name="SpatialEntitiesPlaneTracker" type="XRAnchor3D"]
+script = ExtResource("1_0iy5a")
+
+[node name="Description" type="Label3D" parent="."]
+pixel_size = 0.0005
+text = "Unknown plane"
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+material_override = ExtResource("2_otf88")
+
+[node name="ShowOrientation" parent="." instance=ExtResource("2_wg0hh")]
+editor_description = "This is just for testing, it allows us to see the plane orientation and center."

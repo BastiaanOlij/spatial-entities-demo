@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dsh4e3vb240wp"]
+
+[ext_resource type="Script" uid="uid://cy5t1erf6gpko" path="res://spatial_entities/spatial_entities_anchor.gd" id="1_fq5es"]
+[ext_resource type="PackedScene" uid="uid://g3tc0ii7yb01" path="res://spatial_entities/helpers/axis.tscn" id="2_b74cr"]
+
+[node name="SpatialEntitiesAnchorTracker" type="XRAnchor3D"]
+script = ExtResource("1_fq5es")
+
+[node name="Description" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.012411527, 0)
+pixel_size = 0.0005
+text = "Unknown anchor"
+vertical_alignment = 2
+
+[node name="Axis" parent="." instance=ExtResource("2_b74cr")]

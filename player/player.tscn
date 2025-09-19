@@ -1,0 +1,163 @@
+[gd_scene load_steps=12 format=3 uid="uid://cmgojsxogbcjd"]
+
+[ext_resource type="Script" uid="uid://dyaef107ql3py" path="res://start_vr.gd" id="1_4flbx"]
+[ext_resource type="Script" uid="uid://cvmqo5116aiie" path="res://player/player.gd" id="1_onrkg"]
+[ext_resource type="PackedScene" uid="uid://cjbk77dtubyfc" path="res://player/tools/collision_creation_tool.tscn" id="2_hg6s5"]
+[ext_resource type="PackedScene" uid="uid://c0uvehivldubk" path="res://assets/hands/LeftHandHumanoid.gltf" id="2_hqtel"]
+[ext_resource type="Material" uid="uid://cdioatccaw4ph" path="res://assets/hands/material/outline_material.tres" id="3_2hs0m"]
+[ext_resource type="Script" uid="uid://bnpfu2n01pj60" path="res://player/select_hand_tracker.gd" id="3_8t03j"]
+[ext_resource type="PackedScene" uid="uid://cokxd0umykmsk" path="res://assets/hands/RightHandHumanoid.gltf" id="3_sweqy"]
+[ext_resource type="PackedScene" uid="uid://c0yh3w5mhleyb" path="res://player/handlers/grab_handler.tscn" id="4_2hs0m"]
+[ext_resource type="PackedScene" uid="uid://mkfls6kgnehy" path="res://player/wrist_ui/wrist_ui.tscn" id="5_boad6"]
+[ext_resource type="Script" uid="uid://bltlkkt4dqh5r" path="res://player/modifiers/xr_hand_fallback_modifier_3d.gd" id="6_2ieo8"]
+[ext_resource type="PackedScene" uid="uid://cyajb37v1sk7k" path="res://player/wrist_ui/touch_ui.tscn" id="6_rgyib"]
+
+[node name="Player" type="XROrigin3D"]
+script = ExtResource("1_onrkg")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.6, 0)
+
+[node name="HandTrackingMsg" type="Label3D" parent="XRCamera3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.5)
+pixel_size = 0.001
+text = "Move your hands
+or pickup your
+controllers."
+
+[node name="LeftHand" type="XRNode3D" parent="." node_paths=PackedStringArray("adjust_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"/user/hand_tracker/left"
+show_when_tracked = true
+script = ExtResource("3_8t03j")
+adjust_node = NodePath("LeftHandHumanoid2")
+
+[node name="LeftHandHumanoid2" parent="LeftHand" instance=ExtResource("2_hqtel")]
+
+[node name="LeftHandHumanoidMesh" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="0"]
+material_override = ExtResource("3_2hs0m")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="1"]
+
+[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("6_2ieo8")
+metadata/_custom_type_script = "uid://bltlkkt4dqh5r"
+
+[node name="HandRootAttachment" type="BoneAttachment3D" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="3"]
+transform = Transform3D(1.7881392e-07, -1.838803e-05, 0.99999994, -0.9999985, 0.0016677376, 1.7881392e-07, -0.0016676484, -0.99999833, -1.8358229e-05, 3.8642522e-08, -1.8697472e-05, 0.027175574)
+bone_name = "LeftHand"
+bone_idx = 0
+
+[node name="CollisionCreationTool" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D/HandRootAttachment" node_paths=PackedStringArray("create_on") instance=ExtResource("2_hg6s5")]
+transform = Transform3D(-4.3711392e-08, -0.90630794, -0.4226184, 0, 0.4226183, -0.9063081, 1.0000001, -3.9615976e-08, -1.8473237e-08, 0, 0.1, 0.03)
+create_on = NodePath("../../../../../..")
+
+[node name="GrabHandler" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D/HandRootAttachment" instance=ExtResource("4_2hs0m")]
+transform = Transform3D(1, 0, 3.5527137e-15, 0, 1, 0, 0, 0, 1, -0.02, 0.15, 0.05)
+grab_range = 0.05999999999767169
+action = "trigger"
+
+[node name="WristUI" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D/HandRootAttachment" node_paths=PackedStringArray("camera", "collision_creation_tool") instance=ExtResource("5_boad6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.005, 0.05)
+camera = NodePath("../../../../../../XRCamera3D")
+collision_creation_tool = NodePath("../../../../../../RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/HandRootAttachment/CollisionCreationTool")
+
+[node name="IndexTipAttachment" type="BoneAttachment3D" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D" index="4"]
+transform = Transform3D(0.01489234, 0.39270008, 0.919546, -0.9930924, 0.11285266, -0.03211129, -0.11638325, -0.91271573, 0.39166808, -0.01110013, 0.04294307, -0.17161417)
+bone_name = "LeftIndexTip"
+bone_idx = 9
+
+[node name="TouchUI" parent="LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D/IndexTipAttachment" instance=ExtResource("6_rgyib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+
+[node name="RightHand" type="XRNode3D" parent="." node_paths=PackedStringArray("adjust_node")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"/user/hand_tracker/right"
+show_when_tracked = true
+script = ExtResource("3_8t03j")
+hand = 1
+adjust_node = NodePath("RightHandHumanoid2")
+
+[node name="RightHandHumanoid2" parent="RightHand" instance=ExtResource("3_sweqy")]
+
+[node name="RightHandHumanoidMesh" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="0"]
+material_override = ExtResource("3_2hs0m")
+
+[node name="XRHandModifier3D" type="XRHandModifier3D" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="1"]
+hand_tracker = &"/user/hand_tracker/right"
+
+[node name="XRHandFallbackModifier3D" type="SkeletonModifier3D" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="2"]
+_import_path = NodePath("")
+unique_name_in_owner = false
+process_mode = 0
+process_priority = 0
+process_physics_priority = 0
+process_thread_group = 0
+physics_interpolation_mode = 0
+auto_translate_mode = 0
+editor_description = ""
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+rotation_edit_mode = 0
+rotation_order = 2
+top_level = false
+visible = true
+visibility_parent = NodePath("")
+active = true
+influence = 1.0
+script = ExtResource("6_2ieo8")
+metadata/_custom_type_script = "uid://bltlkkt4dqh5r"
+
+[node name="HandRootAttachment" type="BoneAttachment3D" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="3"]
+transform = Transform3D(1.7881392e-07, 1.838803e-05, -0.99999994, 0.9999985, 0.0016677376, 1.7881392e-07, 0.0016676484, -0.99999833, -1.8358229e-05, -3.8642522e-08, -1.8697472e-05, 0.027175574)
+bone_name = "RightHand"
+bone_idx = 0
+
+[node name="CollisionCreationTool" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/HandRootAttachment" node_paths=PackedStringArray("create_on") instance=ExtResource("2_hg6s5")]
+transform = Transform3D(-4.3711392e-08, 0.90630794, 0.42261833, 0, 0.4226183, -0.90630805, -1.0000001, -3.9615976e-08, -1.8473234e-08, 0, 0.1, 0.03)
+hand = 1
+create_on = NodePath("../../../../../..")
+
+[node name="GrabHandler" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/HandRootAttachment" instance=ExtResource("4_2hs0m")]
+transform = Transform3D(1, 0, -3.5527137e-15, 0, 1, 0, 0, 0, 1, 0.02, 0.15, 0.05)
+grab_range = 0.05999999999767169
+hand = 1
+action = "trigger"
+
+[node name="WristUI" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/HandRootAttachment" node_paths=PackedStringArray("camera", "collision_creation_tool") instance=ExtResource("5_boad6")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, -0.005, 0.05)
+camera = NodePath("../../../../../../XRCamera3D")
+collision_creation_tool = NodePath("../../../../../../LeftHand/LeftHandHumanoid2/LeftHandHumanoid/Skeleton3D/HandRootAttachment/CollisionCreationTool")
+
+[node name="IndexTipAttachment" type="BoneAttachment3D" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D" index="4"]
+transform = Transform3D(0.01903836, -0.39268863, -0.9194744, 0.99322706, 0.11285307, -0.027631793, 0.11461615, -0.91272074, 0.39217746, 0.011100034, 0.04294298, -0.17161338)
+bone_name = "RightIndexTip"
+bone_idx = 9
+
+[node name="TouchUI" parent="RightHand/RightHandHumanoid2/RightHandHumanoid/Skeleton3D/IndexTipAttachment" instance=ExtResource("6_rgyib")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.01)
+touch_id = 1
+
+[node name="StartVR" type="Node3D" parent="."]
+script = ExtResource("1_4flbx")
+
+[connection signal="focus_gained" from="StartVR" to="." method="_on_start_vr_focus_gained"]
+
+[editable path="LeftHand/LeftHandHumanoid2"]
+[editable path="RightHand/RightHandHumanoid2"]

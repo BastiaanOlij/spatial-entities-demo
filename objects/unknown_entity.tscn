@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bap542q37umxu"]
+
+[ext_resource type="Script" uid="uid://c8vwq583k6bmu" path="res://objects/anchored_animatable_body_3d.gd" id="1_dbru4"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(0.2, 0.2, 0.1)
+
+[node name="Triangle" type="AnimatableBody3D"]
+sync_to_physics = false
+script = ExtResource("1_dbru4")
+
+[node name="Label3D" type="Label3D" parent="."]
+pixel_size = 0.003
+text = "?"
+font_size = 64
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lquwl")

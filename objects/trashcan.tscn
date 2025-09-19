@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://c4bnj62bywpvp"]
+
+[ext_resource type="Script" uid="uid://ipbb35t7vxfu" path="res://objects/trashcan.gd" id="1_nw0sm"]
+[ext_resource type="Material" uid="uid://bqp2i7n3p1g0c" path="res://objects/shaders/trashcan-material.tres" id="2_t0u8a"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ptj5i"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_nw0sm"]
+height = 0.2
+radius = 0.075
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_t0u8a"]
+height = 0.09387207
+radius = 0.1
+
+[node name="Trashcan" type="AnimatableBody3D"]
+collision_layer = 2
+collision_mask = 2
+sync_to_physics = false
+script = ExtResource("1_nw0sm")
+reset_on_drop = false
+can_trash = false
+is_unique = true
+
+[node name="Cone" type="CSGCylinder3D" parent="."]
+transform = Transform3D(-1, 8.742278e-08, 0, -8.742278e-08, -1, 0, 0, 0, 1, 0, -0.8, 0)
+radius = 0.075
+height = 1.8
+sides = 16
+cone = true
+material = ExtResource("2_t0u8a")
+
+[node name="RemoveBottom" type="CSGBox3D" parent="Cone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7238811e-08, 0.22364837, 0)
+operation = 2
+size = Vector3(0.2, 1.8416748, 0.2)
+material = ExtResource("2_t0u8a")
+
+[node name="RemoveInside" type="CSGCylinder3D" parent="Cone"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.82, 0)
+operation = 2
+radius = 0.06
+height = 0.18
+sides = 16
+material = SubResource("StandardMaterial3D_ptj5i")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_nw0sm")
+
+[node name="Detector" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Detector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.078063965, 0)
+shape = SubResource("CylinderShape3D_t0u8a")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.122674435, 0)
+pixel_size = 0.001
+billboard = 2
+text = "Trash"

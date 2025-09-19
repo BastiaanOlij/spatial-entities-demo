@@ -1,0 +1,48 @@
+[gd_scene load_steps=10 format=3 uid="uid://wsxyj3l3x25y"]
+
+[ext_resource type="PackedScene" uid="uid://cmgojsxogbcjd" path="res://player/player.tscn" id="1_h2yge"]
+[ext_resource type="Script" uid="uid://b5djpn2x3jbxa" path="res://spatial_entities/spatial_entities_manager.gd" id="2_h2yge"]
+[ext_resource type="PackedScene" uid="uid://dy8b1kf4wem8f" path="res://spatial_entities/spatial_entities_plane_tracker.tscn" id="3_1bvp3"]
+[ext_resource type="PackedScene" uid="uid://dsh4e3vb240wp" path="res://spatial_entities/spatial_entities_anchor.tscn" id="3_lquwl"]
+[ext_resource type="PackedScene" uid="uid://b4oem6nrg2dh5" path="res://spatial_entities/spatial_entities_marker.tscn" id="5_efxa6"]
+[ext_resource type="PackedScene" uid="uid://bwaigrg3nwm3" path="res://objects/inventory_board.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://c4bnj62bywpvp" path="res://objects/trashcan.tscn" id="10_4c57u"]
+
+[sub_resource type="Environment" id="Environment_7dm0k"]
+background_mode = 1
+background_color = Color(0, 0, 0, 0)
+ambient_light_source = 2
+ambient_light_color = Color(0.223103, 0.223103, 0.223103, 1)
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_efxa6"]
+
+[node name="Main" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_7dm0k")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.863501, -0.279087, 0.420091, 0, 0.832941, 0.553363, -0.504347, -0.477829, 0.719245, 0, 5, 0)
+
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(-0.7996951, 0.3322424, -0.50010294, -0.19910549, 0.6390597, 0.7429398, 0.56643176, 0.69369847, -0.44490165, 0.12627697, 5, -2.7048402)
+
+[node name="XROrigin3D" parent="." instance=ExtResource("1_h2yge")]
+
+[node name="SpatialEntitiesManager" type="Node3D" parent="XROrigin3D"]
+script = ExtResource("2_h2yge")
+spatial_anchor_scene = ExtResource("3_lquwl")
+plane_tracker_scene = ExtResource("3_1bvp3")
+marker_tracker_scene = ExtResource("5_efxa6")
+
+[node name="InventoryBoard" parent="." instance=ExtResource("6_7mycd")]
+transform = Transform3D(0.977644, 0, 0.210267, 0, 1, 0, -0.210267, 0, 0.977644, -0.416097, 1.13519, -0.439027)
+
+[node name="Trashcan" parent="." instance=ExtResource("10_4c57u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.422739, 1.07512, -0.278865)
+
+[node name="Floor" type="StaticBody3D" parent="."]
+editor_description = "This is a safety net so we don't drop objects that keep on falling and falling and falling..."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("WorldBoundaryShape3D_efxa6")

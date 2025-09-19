@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://cgexry5d7ccpt"]
+
+[ext_resource type="Script" uid="uid://c8vwq583k6bmu" path="res://objects/anchored_animatable_body_3d.gd" id="1_r0taa"]
+[ext_resource type="Shader" uid="uid://b6xmpilt0bd4j" path="res://objects/shaders/textured.gdshader" id="2_afqus"]
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/misc/pattern.png" id="3_tb546"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0taa"]
+render_priority = 0
+shader = ExtResource("2_afqus")
+shader_parameter/albedo = Color(1, 0.54902, 0.411765, 1)
+shader_parameter/albedo_texture = ExtResource("3_tb546")
+shader_parameter/uv_scale = Vector2(1, 1)
+
+[sub_resource type="PrismMesh" id="PrismMesh_afqus"]
+material = SubResource("ShaderMaterial_r0taa")
+size = Vector3(0.2, 0.2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lquwl"]
+size = Vector3(0.2, 0.2, 0.1)
+
+[node name="Triangle" type="AnimatableBody3D"]
+sync_to_physics = false
+script = ExtResource("1_r0taa")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("PrismMesh_afqus")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_lquwl")

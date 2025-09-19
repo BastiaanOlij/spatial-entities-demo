@@ -1,0 +1,33 @@
+[gd_scene load_steps=7 format=3 uid="uid://5j2iv6dy5ubn"]
+
+[ext_resource type="Script" uid="uid://c8vwq583k6bmu" path="res://objects/anchored_animatable_body_3d.gd" id="1_lnttx"]
+[ext_resource type="Shader" uid="uid://b6xmpilt0bd4j" path="res://objects/shaders/textured.gdshader" id="2_km4jf"]
+[ext_resource type="Texture2D" uid="uid://rek0t7kubpx4" path="res://assets/misc/pattern.png" id="3_it4o0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lnttx"]
+render_priority = 0
+shader = ExtResource("2_km4jf")
+shader_parameter/albedo = Color(0.866667, 1, 0.231373, 1)
+shader_parameter/albedo_texture = ExtResource("3_it4o0")
+shader_parameter/uv_scale = Vector2(1, 1)
+
+[sub_resource type="TorusMesh" id="TorusMesh_km4jf"]
+material = SubResource("ShaderMaterial_lnttx")
+inner_radius = 0.05
+outer_radius = 0.1
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_it4o0"]
+height = 0.05
+radius = 0.1
+
+[node name="Torus" type="AnimatableBody3D"]
+sync_to_physics = false
+script = ExtResource("1_lnttx")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("TorusMesh_km4jf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("CylinderShape3D_it4o0")

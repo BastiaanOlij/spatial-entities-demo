@@ -1,0 +1,49 @@
+[gd_scene load_steps=8 format=3 uid="uid://mkfls6kgnehy"]
+
+[ext_resource type="Script" uid="uid://bg8b7w5qt2wn7" path="res://player/wrist_ui/wrist_ui.gd" id="1_8wyym"]
+[ext_resource type="PackedScene" uid="uid://2h7ihkg4tm6q" path="res://player/wrist_ui/wrist_ui_display.tscn" id="1_nttp6"]
+[ext_resource type="Texture2D" uid="uid://d0c8iwtpslhvm" path="res://assets/kenney.nl/game-icons/PNG/White/1x/smaller.png" id="3_tawth"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_nnbgv"]
+size = Vector3(0.1, 0.1, 0.01)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_nnbgv"]
+viewport_path = NodePath("SubViewport")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nnbgv"]
+resource_local_to_scene = true
+transparency = 1
+shading_mode = 0
+albedo_texture = SubResource("ViewportTexture_nnbgv")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_nnbgv"]
+size = Vector2(0.1, 0.1)
+orientation = 2
+
+[node name="WristUI" type="Node3D"]
+script = ExtResource("1_8wyym")
+
+[node name="UIDetect" type="Area3D" parent="."]
+collision_layer = 512
+collision_mask = 512
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="UIDetect"]
+shape = SubResource("BoxShape3D_nnbgv")
+
+[node name="Display" type="MeshInstance3D" parent="."]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_nnbgv")
+mesh = SubResource("PlaneMesh_nnbgv")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(256, 256)
+
+[node name="WristUIDisplay" parent="SubViewport" instance=ExtResource("1_nttp6")]
+
+[node name="Cursor" type="TextureRect" parent="SubViewport/WristUIDisplay"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("3_tawth")
