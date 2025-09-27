@@ -71,7 +71,7 @@ func _on_spatial_tracking_state_changed(new_state) -> void:
 		# Make this persistent, this will callback UUID changed on the anchor,
 		# we can then store our scene path which we've already applied to our
 		# tracked scene.
-		OpenXRSpatialAnchorCapability.make_anchor_persistent(anchor_tracker)
+		OpenXRSpatialAnchorCapability.persist_anchor(anchor_tracker)
 
 func _on_uuid_changed() -> void:
 	_update_description()
