@@ -84,7 +84,7 @@ static func remove_spatial_anchor(p_anchor : XRAnchor3D) -> void:
 			if SpatialUuidDb:
 				SpatialUuidDb.remove_uuid(anchor_tracker.uuid)
 
-			var future_result = OpenXRSpatialAnchorCapability.make_anchor_unpersistent(anchor_tracker)
+			var future_result = OpenXRSpatialAnchorCapability.unpersist_anchor(anchor_tracker)
 			var success : bool = await future_result.completed
 
 			if success:
