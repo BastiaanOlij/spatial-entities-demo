@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://hq7f8cyxa7xd"
+path="res://.godot/imported/augmented-images-forest.png-acb37fb6e6ea44020431582b5ddb26b9.image"
+
+[deps]
+
+source_file="res://assets/image-tracking/augmented-images-forest.png"
+dest_files=["res://.godot/imported/augmented-images-forest.png-acb37fb6e6ea44020431582b5ddb26b9.image"]
+
+[params]
+

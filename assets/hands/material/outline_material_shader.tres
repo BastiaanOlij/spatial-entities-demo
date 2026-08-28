@@ -1,4 +1,4 @@
-[gd_resource type="VisualShader" load_steps=4 format=3 uid="uid://bub613jl4iybq"]
+[gd_resource type="VisualShader" format=3 uid="uid://bub613jl4iybq"]
 
 [sub_resource type="VisualShaderNodeFresnel" id="VisualShaderNodeFresnel_4b5g4"]
 default_input_values = [2, false, 3, 5.0]
@@ -16,34 +16,6 @@ default_value_enabled = true
 default_value = 5.0
 
 [resource]
-code = "shader_type spatial;
-render_mode blend_mix, depth_draw_opaque, depth_test_default, cull_back, diffuse_lambert, specular_schlick_ggx;
-
-uniform vec4 ColorParameter : source_color = vec4(1.000000, 1.000000, 1.000000, 1.000000);
-uniform float fresnel_power : hint_range(1.0, 10.0, 0.10000000149012) = 5.0;
-
-
-
-void fragment() {
-// ColorParameter:3
-	vec4 n_out3p0 = ColorParameter;
-
-
-// FloatParameter:4
-	float n_out4p0 = fresnel_power;
-
-
-// Fresnel:2
-	float n_out2p0 = pow(1.0 - clamp(dot(NORMAL, VIEW), 0.0, 1.0), n_out4p0);
-
-
-// Output:0
-	ALBEDO = vec3(n_out3p0.xyz);
-	ALPHA = n_out2p0;
-
-
-}
-"
 nodes/fragment/0/position = Vector2(1140, 80)
 nodes/fragment/2/node = SubResource("VisualShaderNodeFresnel_4b5g4")
 nodes/fragment/2/position = Vector2(260, 440)

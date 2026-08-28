@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Spatial entity demo"
 run/main_scene="uid://wsxyj3l3x25y"
-config/features=PackedStringArray("4.6", "GL Compatibility")
+config/features=PackedStringArray("4.8", "GL Compatibility")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -83,17 +83,13 @@ openxr/reference_space=2
 openxr/environment_blend_mode=2
 openxr/foveation_level=3
 openxr/foveation_dynamic=true
+openxr/extensions/debug_utils=3
+openxr/extensions/debug_message_types=2
 openxr/extensions/hand_tracking=true
 openxr/extensions/hand_tracking_unobstructed_data_source=true
 openxr/extensions/hand_tracking_controller_data_source=true
 openxr/extensions/hand_interaction_profile=true
 openxr/extensions/spatial_entity/enabled=true
-openxr/extensions/spatial_entity/enable_spatial_anchors=true
-openxr/extensions/spatial_entity/enable_persistent_anchors=true
-openxr/extensions/spatial_entity/enable_builtin_anchor_detection=true
-openxr/extensions/spatial_entity/enable_plane_tracking=true
-openxr/extensions/spatial_entity/enable_builtin_plane_detection=true
-openxr/extensions/spatial_entity/enable_marker_tracking=true
-openxr/extensions/spatial_entity/enable_builtin_marker_tracking=true
+openxr/extensions/spatial_entity/marker_tracking/enable_builtin_for_types=15
+openxr/extensions/spatial_entity/spatial_image_tracking/enable=true
 shaders/enabled=true
-openxr/extensions/spatial_entity=false

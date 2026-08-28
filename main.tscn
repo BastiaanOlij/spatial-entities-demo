@@ -1,11 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://wsxyj3l3x25y"]
+[gd_scene format=3 uid="uid://wsxyj3l3x25y"]
 
 [ext_resource type="PackedScene" uid="uid://cmgojsxogbcjd" path="res://player/player.tscn" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://b5djpn2x3jbxa" path="res://spatial_entities/spatial_entities_manager.gd" id="2_h2yge"]
 [ext_resource type="PackedScene" uid="uid://dy8b1kf4wem8f" path="res://spatial_entities/spatial_entities_plane_tracker.tscn" id="3_1bvp3"]
 [ext_resource type="PackedScene" uid="uid://dsh4e3vb240wp" path="res://spatial_entities/spatial_entities_anchor.tscn" id="3_lquwl"]
 [ext_resource type="PackedScene" uid="uid://b4oem6nrg2dh5" path="res://spatial_entities/spatial_entities_marker.tscn" id="5_efxa6"]
+[ext_resource type="Script" uid="uid://ppq56xd0ll7r" path="res://manual_implementation/image_tracking.gd" id="6_5vw27"]
 [ext_resource type="PackedScene" uid="uid://bwaigrg3nwm3" path="res://objects/inventory_board.tscn" id="6_7mycd"]
+[ext_resource type="PackedScene" uid="uid://csdjf8lmqnvrn" path="res://spatial_entities/spatial_entities_image.tscn" id="6_efxa6"]
+[ext_resource type="Image" uid="uid://hq7f8cyxa7xd" path="res://assets/image-tracking/augmented-images-forest.png" id="7_kek77"]
+[ext_resource type="Image" uid="uid://cinwe8xv7hcew" path="res://assets/image-tracking/augmented-images-stone.png" id="8_4c57u"]
 [ext_resource type="PackedScene" uid="uid://c4bnj62bywpvp" path="res://objects/trashcan.tscn" id="10_4c57u"]
 
 [sub_resource type="Environment" id="Environment_7dm0k"]
@@ -16,33 +20,39 @@ ambient_light_color = Color(0.223103, 0.223103, 0.223103, 1)
 
 [sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_efxa6"]
 
-[node name="Main" type="Node3D"]
+[node name="Main" type="Node3D" unique_id=893878129]
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1576937307]
 environment = SubResource("Environment_7dm0k")
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1484093163]
 transform = Transform3D(0.863501, -0.279087, 0.420091, 0, 0.832941, 0.553363, -0.504347, -0.477829, 0.719245, 0, 5, 0)
 
-[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment"]
+[node name="DirectionalLight3D2" type="DirectionalLight3D" parent="WorldEnvironment" unique_id=1332561025]
 transform = Transform3D(-0.7996951, 0.3322424, -0.50010294, -0.19910549, 0.6390597, 0.7429398, 0.56643176, 0.69369847, -0.44490165, 0.12627697, 5, -2.7048402)
 
-[node name="XROrigin3D" parent="." instance=ExtResource("1_h2yge")]
+[node name="XROrigin3D" parent="." unique_id=303214489 instance=ExtResource("1_h2yge")]
 
-[node name="SpatialEntitiesManager" type="Node3D" parent="XROrigin3D"]
+[node name="SpatialEntitiesManager" type="Node3D" parent="XROrigin3D" unique_id=1886124006]
 script = ExtResource("2_h2yge")
 spatial_anchor_scene = ExtResource("3_lquwl")
 plane_tracker_scene = ExtResource("3_1bvp3")
 marker_tracker_scene = ExtResource("5_efxa6")
+image_tracker_scene = ExtResource("6_efxa6")
 
-[node name="InventoryBoard" parent="." instance=ExtResource("6_7mycd")]
+[node name="ImageTracking" type="Node" parent="XROrigin3D" unique_id=957563146]
+script = ExtResource("6_5vw27")
+tracking_images = Array[Image]([ExtResource("7_kek77"), ExtResource("8_4c57u")])
+
+[node name="InventoryBoard" parent="." unique_id=1010850385 instance=ExtResource("6_7mycd")]
 transform = Transform3D(0.977644, 0, 0.210267, 0, 1, 0, -0.210267, 0, 0.977644, -0.416097, 1.13519, -0.439027)
+visible = false
 
-[node name="Trashcan" parent="." instance=ExtResource("10_4c57u")]
+[node name="Trashcan" parent="." unique_id=204352511 instance=ExtResource("10_4c57u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.422739, 1.07512, -0.278865)
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." unique_id=1932957803]
 editor_description = "This is a safety net so we don't drop objects that keep on falling and falling and falling..."
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor" unique_id=1713486553]
 shape = SubResource("WorldBoundaryShape3D_efxa6")

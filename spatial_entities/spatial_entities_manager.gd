@@ -20,8 +20,11 @@ signal removed_spatial_entity(node: XRNode3D)
 ## Scene to instantiate for plane tracking spatial entities.
 @export var plane_tracker_scene: PackedScene
 
-## Scene to instantiate for mark tracking spatial entities.
+## Scene to instantiate for marker tracking spatial entities.
 @export var marker_tracker_scene: PackedScene
+
+## Scene to instantiate for image tracking spatial entities.
+@export var image_tracker_scene: PackedScene
 #endregion
 
 #region Private variables
@@ -178,6 +181,14 @@ func _add_tracker(tracker : XRTracker):
 				new_node = new_scene
 			else:
 				push_error("Marker tracking scene doesn't have an XRAnchor3D as a root node and can't be used!")
+				new_scene.free()
+	elif tracker is OpenXRImageTracker:
+		if image_tracker_scene:
+			var new_scene = image_tracker_scene.instantiate()
+			if new_scene is XRAnchor3D:
+				new_node = new_scene
+			else:
+				push_error("Image tracking scene doesn't have an XRAnchor3D as a root node and can't be used!")
 				new_scene.free()
 	elif tracker is OpenXRSpatialEntityTracker:
 		# Type of spatial entity tracker we're not supporting?

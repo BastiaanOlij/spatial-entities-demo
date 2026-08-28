@@ -133,7 +133,6 @@ func _update_hand() -> void:
 
 	tracker = XRServer.get_tracker("left_hand" if hand == 0 else "right_hand")
 	if tracker:
-		print("yeah tracker!")
 		_subscribe_tracker()
 	else:
 		push_error("No tracker for hand %d" % [ hand ])
