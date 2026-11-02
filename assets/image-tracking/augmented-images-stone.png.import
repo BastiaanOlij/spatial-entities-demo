@@ -1,0 +1,14 @@
+[remap]
+
+importer="image"
+type="Image"
+uid="uid://cinwe8xv7hcew"
+path="res://.godot/imported/augmented-images-stone.png-99a89a37cfddd717e2163b1a62394b56.image"
+
+[deps]
+
+source_file="res://assets/image-tracking/augmented-images-stone.png"
+dest_files=["res://.godot/imported/augmented-images-stone.png-99a89a37cfddd717e2163b1a62394b56.image"]
+
+[params]
+

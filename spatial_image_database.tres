@@ -1,0 +1,16 @@
+[gd_resource type="OpenXRSpatialImageDatabase" format=3 uid="uid://d1lcw4jmyjn77"]
+
+[ext_resource type="Image" uid="uid://c0yusokfotiwb" path="res://assets/godot/godot_xr_logo.png" id="1_lajmv"]
+[ext_resource type="Image" uid="uid://cinwe8xv7hcew" path="res://assets/image-tracking/augmented-images-stone.png" id="2_pbuku"]
+[ext_resource type="Image" uid="uid://hq7f8cyxa7xd" path="res://assets/image-tracking/augmented-images-forest.png" id="3_upt7k"]
+
+[resource]
+images/0/image = ExtResource("1_lajmv")
+images/1/image = ExtResource("2_pbuku")
+images/1/physical_width = 6.4571787e-21
+images/1/is_static = false
+images/2/image = ExtResource("3_upt7k")
+images/2/physical_width = 0.0
+images/2/is_static = false
+images/3/physical_width = 0.0
+images/3/is_static = false
